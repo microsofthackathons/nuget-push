@@ -31,7 +31,13 @@ fakeget push <package.nupkg> -s https://loshar-auth-wus2.azurewebsites.net/v3/in
 
 This will prompt you to login before uploading the package.
 
-### Source code
+### Links
+
+* [Intro to Device Code Flow](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki/Device-Code-Flow)
+* [Create AAD resources for device flow authentication](https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore-v2/tree/master/1.%20Desktop%20app%20calls%20Web%20API)
+* [Azure's device flow SDK](https://docs.microsoft.com/en-us/dotnet/api/azure.identity.devicecodecredential?view=azure-dotnet)
+
+## Source code
 
 You can find the following projects in the `src` directory:
 
@@ -39,15 +45,12 @@ You can find the following projects in the `src` directory:
 * `NuGetServer` - A minimal NuGet server to prototype new authentication mechanisms
 * `TestClient` and `TestServer` - Minimal apps to test Azure Active Directory's device flow authentication
 
-### Links
-
-* [Intro to Device Code Flow](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki/Device-Code-Flow)
-* [Create AAD resources for device flow authentication](https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore-v2/tree/master/1.%20Desktop%20app%20calls%20Web%20API)
-* [Azure's device flow SDK](https://docs.microsoft.com/en-us/dotnet/api/azure.identity.devicecodecredential?view=azure-dotnet)
-
 ## Leaked API keys
 
+Here is the breakdown of API keys leaked on GitHub in the last 90 days:
 
+* 52.5% of keys were in configuration files that are triggered automatically
+* 47.5% keys were in scripts to manually upload packages
 
 ## Contributing
 
