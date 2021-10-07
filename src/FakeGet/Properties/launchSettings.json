@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FakeGet": {
+      "commandName": "Project",
+      "commandLineArgs": "push -s https://localhost:5001/v3/index.json \"C:\\Users\\sharm\\.nuget\\packages\\newtonsoft.json\\12.0.1\\newtonsoft.json.12.0.1.nupkg\" --interactive"
+    }
+  }
+}

@@ -1,4 +1,7 @@
-# Project
+_⚠ This is a hackathon project with no support or quality guarantee_
+
+# Simplify NuGet push!
+
 
 > This repo has been populated by an initial template to help get you started. Please
 > make sure to update the content to build a great experience for community-building.
