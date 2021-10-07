@@ -29,7 +29,6 @@ namespace TestClient
                 scopes: new string[] { "api://a4227f47-fd47-4586-a64b-609c3f0ebfd7/upload_package" }, // server app scope
                 tenantId: "65835d77-014d-4568-9bac-9804d2200f87");
 
-
             try
             {
                 AccessToken result = await credential.GetTokenAsync(request);
