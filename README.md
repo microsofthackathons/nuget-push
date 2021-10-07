@@ -4,6 +4,8 @@ _⚠ This is a hackathon project with no support or quality guarantee_
 
 This project is a prototype to make it easier to push packages... and way more secure too!
 
+See this spec for more information: [NuGet.org login authentication workflow for dotnet nuget push](https://github.com/NuGet/Home/blob/f2251f43d164a8789e4e547efe3b0e518e4ff256/proposed/2021/NuGet-org-login-auth-for-dotnet-nuget-push.md)
+
 ## Device Flow authentication
 
 [Device Flow](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki/Device-Code-Flow) prompts you to login by providing a link and a code:
