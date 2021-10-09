@@ -5,15 +5,13 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7C99E2CC-F465-4692-84D2-43D45BAE7E70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient", "src\TestClient\TestClient.csproj", "{ABB37655-50BC-4035-8328-9429F2F20A38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestClient", "src\TestClient\TestClient.csproj", "{ABB37655-50BC-4035-8328-9429F2F20A38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServer", "src\TestServer\TestServer.csproj", "{97D4FA45-6DAA-4846-A5F2-19E9F79C87E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestServer", "src\TestServer\TestServer.csproj", "{97D4FA45-6DAA-4846-A5F2-19E9F79C87E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeGet", "src\FakeGet\FakeGet.csproj", "{84D8C728-581F-48EF-BCD0-D6D43CE4D0FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeGet", "src\FakeGet\FakeGet.csproj", "{84D8C728-581F-48EF-BCD0-D6D43CE4D0FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetServer", "src\NuGetServer\NuGetServer.csproj", "{6B357665-AC5D-46C9-96A9-DB843F9E96A3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubActionListener", "src\GitHubActionListener\GitHubActionListener.csproj", "{60FA1FFD-9F04-485B-A641-FA3FA3B99418}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGetServer", "src\NuGetServer\NuGetServer.csproj", "{6B357665-AC5D-46C9-96A9-DB843F9E96A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,9 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ABB37655-50BC-4035-8328-9429F2F20A38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -76,24 +71,17 @@ Global
 		{6B357665-AC5D-46C9-96A9-DB843F9E96A3}.Release|x64.Build.0 = Release|Any CPU
 		{6B357665-AC5D-46C9-96A9-DB843F9E96A3}.Release|x86.ActiveCfg = Release|Any CPU
 		{6B357665-AC5D-46C9-96A9-DB843F9E96A3}.Release|x86.Build.0 = Release|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Debug|x64.Build.0 = Debug|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Debug|x86.Build.0 = Debug|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Release|x64.ActiveCfg = Release|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Release|x64.Build.0 = Release|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Release|x86.ActiveCfg = Release|Any CPU
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ABB37655-50BC-4035-8328-9429F2F20A38} = {7C99E2CC-F465-4692-84D2-43D45BAE7E70}
 		{97D4FA45-6DAA-4846-A5F2-19E9F79C87E3} = {7C99E2CC-F465-4692-84D2-43D45BAE7E70}
 		{84D8C728-581F-48EF-BCD0-D6D43CE4D0FE} = {7C99E2CC-F465-4692-84D2-43D45BAE7E70}
 		{6B357665-AC5D-46C9-96A9-DB843F9E96A3} = {7C99E2CC-F465-4692-84D2-43D45BAE7E70}
-		{60FA1FFD-9F04-485B-A641-FA3FA3B99418} = {7C99E2CC-F465-4692-84D2-43D45BAE7E70}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09A0C6CF-CA63-4539-A6AB-3AB8D3475BEA}
 	EndGlobalSection
 EndGlobal
