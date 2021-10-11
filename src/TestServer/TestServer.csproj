@@ -1,11 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>1e0a9ce8-62a4-4dad-8e71-90ed900355a2</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
     <PackageReference Include="Microsoft.Identity.Web" Version="1.18.0" />
+    <PackageReference Include="NuGet.Packaging" Version="5.11.0" />
   </ItemGroup>
 
 </Project>

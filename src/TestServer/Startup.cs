@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
+using System;
+using System.Net.Http;
 
 namespace TestServer
 {
@@ -22,6 +24,10 @@ namespace TestServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddHttpClient<GitHubClient>();
+
+            services.Configure<GitHubOptions>(Configuration.GetSection("GitHub"));
 
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
