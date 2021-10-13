@@ -2,11 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>1e0a9ce8-62a4-4dad-8e71-90ed900355a2</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Remove="C:\Users\sharm\.nuget\packages\baget.web\0.4.0-preview2\contentFiles\any\netcoreapp3.1\libman.json" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BaGet.Database.Sqlite" Version="0.4.0-preview2" />

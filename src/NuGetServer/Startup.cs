@@ -21,6 +21,10 @@ namespace NuGetServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient<GitHubClient>();
+
+            services.Configure<GitHubOptions>(Configuration.GetSection("GitHub"));
+
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration);
@@ -48,6 +52,12 @@ namespace NuGetServer
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "github",
+                    pattern: "github-webhook",
+                    defaults: new { controller = "Webhook", action = "GitHubWebhook" }
+                );
+
                 // Add BaGet's endpoints.
                 endpoints.MapRazorPages();
 

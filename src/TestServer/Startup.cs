@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
+using System;
+using System.Net.Http;
 
 namespace TestServer
 {
@@ -22,6 +25,10 @@ namespace TestServer
         {
             services.AddControllers();
 
+            services.AddHttpClient<GitHubClient>();
+
+            services.Configure<GitHubOptions>(Configuration.GetSection("GitHub"));
+
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration);
@@ -38,10 +45,10 @@ namespace TestServer
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -51,10 +58,18 @@ namespace TestServer
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGet("/", async ctx => await ctx.Response.WriteAsync("Hello world"));
+
                 endpoints.MapControllerRoute(
                     name: "hello",
                     pattern: "hello",
                     defaults: new { controller = "Hello", action = "World" }
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "github",
+                    pattern: "github-webhook",
+                    defaults: new { controller = "Hello", action = "GitHubWebhook" }
                 );
             });
         }

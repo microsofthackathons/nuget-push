@@ -1,33 +1,29 @@
-using Microsoft.AspNetCore.Authorization;
+using BaGet.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NuGet.Packaging;
 using System;
 using System.IO.Compression;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TestServer
+namespace NuGetServer
 {
-    public class HelloController : Controller
+    public class WebhookController : Controller
     {
         private readonly GitHubClient _github;
-        private readonly ILogger<HelloController> _logger;
+        private readonly IPackageIndexingService _packages;
+        private readonly ILogger<WebhookController> _logger;
 
-        public HelloController(
+        public WebhookController(
             GitHubClient github,
-            ILogger<HelloController> logger)
+            IPackageIndexingService packages,
+            ILogger<WebhookController> logger)
         {
             _github = github;
+            _packages = packages;
             _logger = logger;
-        }
-
-        [Authorize]
-        public IActionResult World()
-        {
-            return Ok("Hello");
         }
 
         [HttpPost]
@@ -81,34 +77,45 @@ namespace TestServer
                         entry.FullName,
                         artifact.Name);
 
-                    using var entryStream = entry.Open();
+                    using var entryStream = await entry.Open().ToTemporaryFileStreamAsync(cancellationToken);
 
                     try
                     {
-                        var packageReader = new PackageArchiveReader(entryStream);
-                        var identity = packageReader.GetIdentity();
+                        // Verify the stream contains a package...
+                        string packageId;
+                        string packageVersion;
+                        using (var packageReader = new PackageArchiveReader(entryStream, leaveStreamOpen: true))
+                        {
+                            var identity = packageReader.GetIdentity();
+
+                            packageId = identity.Id;
+                            packageVersion = identity.Version.ToNormalizedString();
+                        }
+
+                        // No exception was thrown. The stream is indeed a package.
+                        // Reset it and index its content.
+                        entryStream.Position = 0;
 
                         _logger.LogInformation(
                             "Indexing package {PackageId} {PackageVersion} in entry {Entry} in artifact {ArtifactName}...",
-                            identity.Id,
-                            identity.Version.ToNormalizedString(),
+                            packageId,
+                            packageVersion,
                             entry.FullName,
                             artifact.Name);
 
-                        // ...
+                        await _packages.IndexAsync(entryStream, cancellationToken);
 
                         _logger.LogInformation(
                             "Indexed package {PackageId} {PackageVersion} in entry {Entry} in artifact {ArtifactName}...",
-                            identity.Id,
-                            identity.Version.ToNormalizedString(),
+                            packageId,
+                            packageVersion,
                             entry.FullName,
                             artifact.Name);
-
-
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        _logger.LogDebug(
+                        _logger.LogWarning(
+                            ex,
                             "Failed to index entry {Entry} from artifact {ArtifactName}",
                             entry.FullName,
                             artifact.Name);
@@ -123,48 +130,5 @@ namespace TestServer
 
             return Json(e);
         }
-    }
-
-    // See: https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_run
-    public class WorkflowRunEvent
-    {
-        [JsonPropertyName("action")]
-        public string Action { get; set; }
-
-        [JsonPropertyName("workflow_run")]
-        public WorkflowRun WorkflowRun { get; set; }
-
-        [JsonPropertyName("repository")]
-        public Repository Repository { get; set; }
-    }
-
-    public class WorkflowRun
-    {
-        [JsonPropertyName("id")]
-        public int Id { get; set; }
-
-        [JsonPropertyName("status")]
-        public string Status { get; set; }
-
-        [JsonPropertyName("conclusion")]
-        public string Conclusion { get; set; }
-    }
-
-    public class Repository
-    {
-        [JsonPropertyName("full_name")]
-        public string FullName { get; set; }
-
-        [JsonPropertyName("name")]
-        public string Name {get; set; }
-
-        [JsonPropertyName("owner")]
-        public Owner Owner { get; set; }
-    }
-
-    public class Owner
-    {
-        [JsonPropertyName("login")]
-        public string Login { get; set; }
     }
 }
